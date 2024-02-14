@@ -2,7 +2,10 @@
 """module to implement basic auth"""
 
 import base64
+from typing import TypeVar
 from api.v1.auth.auth import Auth
+from models.base import DATA, Base
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -64,3 +67,37 @@ class BasicAuth(Auth):
             return (None, None)
         else:
             return (decoded_base64_authorization_header.split(':'))
+
+    def user_object_from_credentials(self,
+                                     user_email: str,
+                                     user_pwd: str) -> TypeVar('User'):
+        """user obj from cred
+
+        Args:
+            self (_type_): _description_
+            user_email (str): email extracted
+            user_pwd (str): pw extracted
+        """
+        if user_email is None or\
+            type(user_email) is not str or\
+                user_pwd is None or\
+                    type(user_pwd) is not str:
+            return None
+        Base.load_from_file()
+        found = False
+        if DATA['User'] is None or\
+            len(DATA['User']) == 0:
+                return None
+        user = None
+        for val in DATA['User'].values:
+            if val.email == user_email:
+                user = User(**{
+                    'email': user_email,
+                    '_password': val.password,
+                })
+                if user.is_valid_password(user_pwd):
+                    found = True
+        if not found:
+            return None
+        else:
+            return
