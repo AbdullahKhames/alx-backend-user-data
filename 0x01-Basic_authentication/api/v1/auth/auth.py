@@ -39,9 +39,8 @@ class Auth:
         Returns:
             str: None - request will be the Flask request object
         """
-        print(dir(request))
         if request is None\
-            or request.authorization:
+            or request.authorization is None:
             return None
         else:
             return request.authorization
