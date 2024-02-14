@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 module to check auth
-""" 
+"""
 from typing import List, TypeVar
 from flask import request
 
@@ -16,12 +16,11 @@ class Auth:
             excluded_paths (List[str]): _description_
 
         Returns:
-            bool: returns False - 
+            bool: returns False
             path and excluded_paths will be used later,
             now, you don’t need to take care of them
         """
         return False
-
 
     def authorization_header(self, request=None) -> str:
         """method to add header
@@ -33,7 +32,6 @@ class Auth:
             str: None - request will be the Flask request object
         """
         return None
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """current user
