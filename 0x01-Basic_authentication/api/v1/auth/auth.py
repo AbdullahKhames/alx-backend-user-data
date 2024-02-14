@@ -29,6 +29,7 @@ class Auth:
         print(path)
         if path in excluded_paths:
             return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """method to add header
