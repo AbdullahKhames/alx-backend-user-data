@@ -2,7 +2,7 @@
 """
 module to check auth
 """ 
-from typing import TypeVar
+from typing import List, TypeVar
 from flask import request
 
 
