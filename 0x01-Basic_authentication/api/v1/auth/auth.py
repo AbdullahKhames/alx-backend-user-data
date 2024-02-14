@@ -20,7 +20,14 @@ class Auth:
             path and excluded_paths will be used later,
             now, you don’t need to take care of them
         """
-        return False
+        if path is None or\
+            excluded_paths is None or\
+                len(excluded_paths) == 0:
+            return True
+        if path[-1] != '/':
+            path = path + '/'
+        if path in excluded_paths:
+            return False
 
     def authorization_header(self, request=None) -> str:
         """method to add header
