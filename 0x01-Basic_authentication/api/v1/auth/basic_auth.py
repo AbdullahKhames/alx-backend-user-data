@@ -16,4 +16,9 @@ class BasicAuth(Auth):
         Returns:
             str: _description_
         """
-        pass
+        if authorization_header is None or\
+            type(authorization_header) is not str or\
+                not authorization_header.startswith('Basic '):
+                    return None
+        else:
+            return authorization_header.split(' ')[1]
