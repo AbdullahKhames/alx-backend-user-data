@@ -39,7 +39,11 @@ class Auth:
         Returns:
             str: None - request will be the Flask request object
         """
-        return None
+        if request is None\
+            or request.authorization:
+            return None
+        else:
+            return request.authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
         """current user
