@@ -20,7 +20,7 @@ class Auth:
             path and excluded_paths will be used later,
             now, you don’t need to take care of them
         """
-        pass
+        return False
 
 
     def authorization_header(self, request=None) -> str:
@@ -32,10 +32,12 @@ class Auth:
         Returns:
             str: None - request will be the Flask request object
         """
-        pass
-    
+        return None
+
+
     def current_user(self, request=None) -> TypeVar('User'):
         """current user
         returns:
             returns None - request will be the Flask request object
         """
+        return None
