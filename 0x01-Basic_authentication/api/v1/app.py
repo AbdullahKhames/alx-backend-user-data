@@ -15,7 +15,7 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 if getenv("AUTH_TYPE") is not None:
-    auth =  Auth()
+    auth = Auth()
 
 
 @app.errorhandler(404)
@@ -41,15 +41,18 @@ def forbidden(error) -> str:
 
 @app.before_request
 def check_auth():
+    """checks auth
+    """
     if auth is None:
         return
-    is_required = auth.require_auth(request.path, ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/'])
-    if is_required:
+    if auth.require_auth(request.path,
+                         ['/api/v1/status/',
+                          '/api/v1/unauthorized/',
+                          '/api/v1/forbidden/']):
         if auth.authorization_header(request) is None:
             abort(401)
         if auth.current_user(request) is None:
             abort(403)
-
 
 
 if __name__ == "__main__":

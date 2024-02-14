@@ -40,7 +40,7 @@ class Auth:
             str: None - request will be the Flask request object
         """
         if request is None\
-            or request.headers['Authorization'] is None:
+           or request.headers['Authorization'] is None:
             return None
         else:
             return request.headers['Authorization']
