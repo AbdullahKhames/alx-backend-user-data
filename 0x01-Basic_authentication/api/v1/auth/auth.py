@@ -43,6 +43,7 @@ class Auth:
             or request.authorization:
             return None
         else:
+            print(dir(request))
             return request.authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
