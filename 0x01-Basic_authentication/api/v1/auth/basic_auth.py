@@ -90,7 +90,6 @@ class BasicAuth(Auth):
                 return None
         user = None
         for val in DATA['User'].values():
-            print(val)
             if val.email == user_email:
                 user = User(**{
                     'email': user_email,
