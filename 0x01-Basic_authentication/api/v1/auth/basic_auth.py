@@ -88,6 +88,7 @@ class BasicAuth(Auth):
            len(DATA['User']) == 0:
             return None
         users = User.search({'email': user_email})
+        print(users)
         user = None
         for u in users:
             if u.email == user_email:
