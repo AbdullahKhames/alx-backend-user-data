@@ -95,6 +95,8 @@ class BasicAuth(Auth):
                 user = User(**{
                     'email': user_email,
                     '_password': val.password,
+                    'first_name': val.first_name,
+                    'last_name': val.last_name
                 })
                 if user.is_valid_password(user_pwd):
                     found = True
