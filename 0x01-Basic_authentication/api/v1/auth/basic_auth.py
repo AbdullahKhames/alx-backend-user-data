@@ -100,4 +100,4 @@ class BasicAuth(Auth):
         if not found:
             return None
         else:
-            return
+            return user
