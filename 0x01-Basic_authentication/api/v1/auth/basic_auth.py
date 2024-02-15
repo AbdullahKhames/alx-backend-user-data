@@ -92,8 +92,9 @@ class BasicAuth(Auth):
         for u in users:
             if u.email == user_email:
                 user = u
-        if user.is_valid_password(user_pwd):
-            found = True
+            if user and user.is_valid_password(user_pwd):
+                found = True
+                break
         if not found:
             return None
         else:
