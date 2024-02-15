@@ -83,23 +83,18 @@ class BasicAuth(Auth):
                 user_pwd is None or\
                 type(user_pwd) is not str:
             return None
-        Base.load_from_file()
         found = False
         if DATA['User'] is None or\
            len(DATA['User']) == 0:
             return None
-        user = None
-        for val in DATA['User'].values():
-            if val.email == user_email:
-                user = User(**{
-                    'email': user_email,
-                    '_password': val.password,
-                    'first_name': val.first_name,
-                    'last_name': val.last_name
-                })
-                if user.is_valid_password(user_pwd):
-                    found = True
+        user = User.search({'email': user_email})
+        if user.is_valid_password(user_pwd):
+            found = True
         if not found:
             return None
         else:
             return user
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """function to return current user 
+        """
