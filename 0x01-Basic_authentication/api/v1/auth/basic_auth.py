@@ -81,13 +81,13 @@ class BasicAuth(Auth):
         if user_email is None or\
             type(user_email) is not str or\
                 user_pwd is None or\
-                    type(user_pwd) is not str:
+                type(user_pwd) is not str:
             return None
         Base.load_from_file()
         found = False
         if DATA['User'] is None or\
-            len(DATA['User']) == 0:
-                return None
+           len(DATA['User']) == 0:
+            return None
         user = None
         for val in DATA['User'].values():
             if val.email == user_email:
