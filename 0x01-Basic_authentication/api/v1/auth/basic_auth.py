@@ -89,7 +89,7 @@ class BasicAuth(Auth):
             len(DATA['User']) == 0:
                 return None
         user = None
-        for val in DATA['User'].values:
+        for val in DATA['User'].values():
             if val.email == user_email:
                 user = User(**{
                     'email': user_email,
