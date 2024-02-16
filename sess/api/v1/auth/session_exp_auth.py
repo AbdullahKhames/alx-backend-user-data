@@ -14,7 +14,7 @@ class SessionExpAuth(SessionAuth):
         self.session_duration = duration
             
     def create_session(self, user_id=None):
-        session_id = super(self, user_id)
+        session_id = super().create_session(user_id=user_id)
         if session_id is None:
             return None
         self.user_id_by_session_id[session_id] = {'user_id': user_id,
