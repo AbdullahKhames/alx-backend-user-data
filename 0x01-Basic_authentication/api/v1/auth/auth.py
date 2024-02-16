@@ -28,6 +28,11 @@ class Auth:
             path = path + '/'
         if path in excluded_paths:
             return False
+        for current_path in excluded_paths:
+            path = path.split("/")[-1]
+            current_path = current_path.split("/")[-1]
+            if current_path.endswith('*') and current_path[0:-1] in path:
+                return False
         return True
 
     def authorization_header(self, request=None) -> str:
