@@ -31,6 +31,7 @@ class SessionExpAuth(SessionAuth):
         if 'created_at' not in self.user_id_by_session_id[session_id]:
             return None
         max_duration = self.user_id_by_session_id[session_id]['created_at'] + timedelta(self.session_duration)
+        print(max_duration)
         if datetime.now() > max_duration:
             return None
         return self.user_id_by_session_id[session_id]['user_id']
