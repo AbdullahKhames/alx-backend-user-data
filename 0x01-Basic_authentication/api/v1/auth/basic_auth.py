@@ -93,8 +93,7 @@ class BasicAuth(Auth):
             if u.email == user_email and u.is_valid_password(user_pwd):
                 user = u
                 break
-        else:
-            return user
+        return user
 
     def current_user(self, request=None) -> TypeVar('User'):
         """function to return current user
