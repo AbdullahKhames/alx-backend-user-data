@@ -2,6 +2,7 @@
 """
 module to check auth
 """
+from os import getenv
 from typing import List, TypeVar
 from flask import request
 
@@ -59,3 +60,10 @@ class Auth:
             returns None - request will be the Flask request object
         """
         return None
+
+    def session_cookie(self, request=None):
+        """returns a cookie value from a request:"""
+        if request is None:
+            return None
+        sess_cookie_name = getenv('SESSION_NAME')
+        return request.cookies.get(sess_cookie_name)
