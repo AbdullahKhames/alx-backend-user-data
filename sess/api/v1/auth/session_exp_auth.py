@@ -5,7 +5,7 @@ from api.v1.auth.session_auth import SessionAuth
 
 class SessionExpAuth(SessionAuth):
     def __init__(self,*args, **kwargs):
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         duration = 0
         try:
             duration = int(getenv('SESSION_DURATION'))
