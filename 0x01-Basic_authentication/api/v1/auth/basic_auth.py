@@ -89,6 +89,7 @@ class BasicAuth(Auth):
         users = User.search({'email': user_email})
         user = None
         for u in users:
+            u.display_name()
             if u.email == user_email and u.is_valid_password(user_pwd):
                 user = u
                 break
