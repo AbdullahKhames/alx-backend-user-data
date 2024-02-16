@@ -83,14 +83,13 @@ class BasicAuth(Auth):
                 user_pwd is None or\
                 type(user_pwd) is not str:
             return None
+        User.load_from_file()
         if DATA['User'] is None or\
            len(DATA['User']) == 0:
             return None
         users = User.search({'email': user_email})
         user = None
         for u in users:
-            print("printing u")
-            print(u.display_name())
             if u.email == user_email and u.is_valid_password(user_pwd):
                 user = u
                 break
