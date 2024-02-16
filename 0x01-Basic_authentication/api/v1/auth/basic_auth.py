@@ -90,7 +90,7 @@ class BasicAuth(Auth):
         user = None
         for u in users:
             print("printing u")
-            u.display_name()
+            print(u.display_name())
             if u.email == user_email and u.is_valid_password(user_pwd):
                 user = u
                 break
