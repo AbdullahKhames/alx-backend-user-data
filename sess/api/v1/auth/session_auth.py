@@ -33,7 +33,7 @@ def login():
     email = request.form.get('email')
     if email is None or email == '':
         return jsonify({ "error": "email missing" }), 400
-    password  = request.form.get('password ')
+    password  = request.form.get('password')
     if password  is None or password  == '':
         return jsonify({ "error": "password missing" }), 400
     user = User.search({'email': email})
