@@ -46,6 +46,7 @@ def forbidden(error) -> str:
 def check_auth():
     """checks auth
     """
+    request.current_user = auth.current_user(request)
     if auth is None:
         return
     if auth.require_auth(request.path,
