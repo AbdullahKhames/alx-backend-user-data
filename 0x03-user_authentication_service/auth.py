@@ -53,8 +53,7 @@ class Auth:
         """creates a session for the user"""
         try:
             user = self._db.find_user_by(email=email)
-            user.session_id = _generate_uuid()
-            self._db.update_user(user.id)
+            self._db.update_user(user.id, session_id=_generate_uuid())
             return user.session_id
         except NoResultFound:
             return None
@@ -70,8 +69,7 @@ class Auth:
         """destroys a session for the user"""
         try:
             user = self._db.find_user_by(id=user_id)
-            user.session_id = None
-            self._db.update_user(user.id)
+            self._db.update_user(user.id, session_id=None)
             return None
         except NoResultFound:
             return None
@@ -80,8 +78,7 @@ class Auth:
         """function to get reset password token for an email"""
         try:
             user = self._db.find_user_by(email=email)
-            user.reset_token = _generate_uuid()
-            self._db.update_user(user_id=user.id)
+            self._db.update_user(user_id=user.id, reset_token=_generate_uuid())
             return user.reset_token
         except NoResultFound:
             raise ValueError
