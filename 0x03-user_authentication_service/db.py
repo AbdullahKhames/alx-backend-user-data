@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DB module
 """
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, and_
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
@@ -48,7 +48,7 @@ class DB:
                 my_filters.add(getattr(User, k) == v)
             else:
                 raise InvalidRequestError
-        user = self._session.query(User).filter(*my_filters).first()
+        user = self._session.query(User).filter(and_(*my_filters)).first()
         if user is None:
             raise NoResultFound
         return user
