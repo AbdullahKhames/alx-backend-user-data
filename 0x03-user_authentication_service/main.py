@@ -5,7 +5,7 @@ Main file
 from requests import post, put
 
 
-BASE_URL = 'http//localhost:5000'
+BASE_URL = 'http://localhost:5000'
 SESSION_PATH = 'sessions'
 USERS_PATH = 'users'
 PROFILE_PATH = 'profile'
