@@ -17,9 +17,3 @@ class User(Base):
     hashed_password = Column(String(250), nullable=False)
     session_id = Column(String(250))
     reset_token = Column(String(250))
-
-    def __init__(self, *args, **kwargs):
-        """method to construct object"""
-        for k, v in kwargs.items():
-            if hasattr(self, k):
-                setattr(self, k, v)
