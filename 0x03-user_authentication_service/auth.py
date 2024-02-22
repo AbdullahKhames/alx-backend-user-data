@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """module for implementing auth module functionalities"""
+from typing import Union
+
 from bcrypt import gensalt, hashpw, checkpw
 from db import DB
 from user import User
@@ -47,7 +49,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email: str) ->str:
+    def create_session(self, email: str) -> Union[str, None]:
         """creates a session for the user"""
         try:
             user = self._db.find_user_by(email=email)
@@ -55,4 +57,4 @@ class Auth:
             self._db.update_user(user.id)
             return user.session_id
         except NoResultFound:
-            return ""
+            return None
