@@ -4,7 +4,6 @@ Main file
 """
 from requests import post, put
 
-
 BASE_URL = 'http://localhost:5000'
 SESSION_PATH = 'sessions'
 USERS_PATH = 'users'
@@ -22,7 +21,9 @@ def register_user(email: str, password: str) -> None:
 
 def log_in_wrong_password(email: str, password: str) -> None:
     """function to test with requests module the server"""
-    pass
+    resp = post(BASE_URL + SEP + SESSION_PATH, data={'email': email,
+                                                     'password': password})
+    print(resp.json())
 
 
 def log_in(email: str, password: str) -> str:
@@ -61,7 +62,7 @@ NEW_PASSWD = "t4rt1fl3tt3"
 
 if __name__ == "__main__":
     register_user(EMAIL, PASSWD)
-    # log_in_wrong_password(EMAIL, NEW_PASSWD)
+    log_in_wrong_password(EMAIL, NEW_PASSWD)
     # profile_unlogged()
     # session_id = log_in(EMAIL, PASSWD)
     # profile_logged(session_id)
