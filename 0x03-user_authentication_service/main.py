@@ -32,6 +32,7 @@ def log_in(email: str, password: str) -> str:
     """function to test with requests module the server"""
     resp = post(BASE_URL + SEP + SESSION_PATH, data={'email': email,
                                                      'password': password})
+    print(resp.content)
     assert resp.status_code == 200
     assert resp.json() == {"email": email,
                            "message": "logged in"}
