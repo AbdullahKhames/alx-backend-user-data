@@ -2,7 +2,7 @@
 """module for implementing user module functionalities"""
 from flask import Flask, jsonify, request
 from auth import Auth
-
+from user import User
 
 AUTH = Auth()
 app = Flask(__name__)
@@ -16,7 +16,13 @@ def bienvenue():
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users():
     """method to register users"""
-    print(request.form)
+    try:
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = AUTH.register_user(email, password)
+        return jsonify({"email": user.email, "message": "user created"})
+    except ValueError:
+        return jsonify({"message": "email already registered"})
 
 
 if __name__ == "__main__":
