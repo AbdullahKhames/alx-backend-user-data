@@ -42,11 +42,13 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """ find user function """
-        users = self._session.query(User)
-        for key, value in kwargs.items():
-            if key not in User.__dict__:
+        my_filters = set()
+        for k, v in kwargs.items():
+            if hasattr(User, k):
+                my_filters.add(getattr(User, k) == v)
+            else:
                 raise InvalidRequestError
-            for user in users:
-                if getattr(user, key) == value:
-                    return user
-                raise NoResultFound
+        user = self._session.query(User).filter(*my_filters).first()
+        if user is None:
+            raise NoResultFound
+        return user
