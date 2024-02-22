@@ -46,3 +46,13 @@ class Auth:
             return checkpw(user_bytes, user.hashed_password)
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) ->str:
+        """creates a session for the user"""
+        try:
+            user = self._db.find_user_by(email=email)
+            user.session_id = _generate_uuid()
+            self._db.update_user(user.id)
+            return user.session_id
+        except NoResultFound:
+            return ""
