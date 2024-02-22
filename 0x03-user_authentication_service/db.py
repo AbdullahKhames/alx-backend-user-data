@@ -45,7 +45,6 @@ class DB:
         """
         method to find by arbitrary args
         """
-        # user_attrs = ['id', 'email', 'hashed_password','session_id', 'reset_token']
         my_filters = set()
 
         for k, v in kwargs.items():
