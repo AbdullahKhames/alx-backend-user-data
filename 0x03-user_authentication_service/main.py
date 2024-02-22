@@ -35,6 +35,9 @@ def log_in(email: str, password: str) -> str:
     assert resp.status_code == 200
     assert resp.json() == {"email": email,
                            "message": "logged in"}
+    cookie = resp.cookies.get('session_id')
+    print(cookie)
+    return cookie
 
 
 def profile_unlogged() -> None:
