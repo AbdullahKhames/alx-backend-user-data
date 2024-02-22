@@ -90,6 +90,8 @@ class Auth:
         """updates the password based on the reset token"""
         try:
             user = self._db.find_user_by(reset_token=reset_token)
-            self._db.update_user(user.id, hashed_password=_hash_password(password), reset_token=None)
+            hashed_password = _hash_password(password).decode('utf-8')
+            self._db.update_user(user.id, hashed_password=hashed_password,
+                                 reset_token=None)
         except NoResultFound:
             raise ValueError
