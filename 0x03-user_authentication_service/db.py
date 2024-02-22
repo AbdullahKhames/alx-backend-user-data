@@ -45,14 +45,17 @@ class DB:
         """
         method to find by arbitrary args
         """
-        my_filters = set()
+        if not kwargs:
+            raise InvalidRequestError
 
-        for k, v in kwargs.items():
-            if hasattr(User, k):
-                my_filters.add(getattr(User, k) == v)
-            else:
+        columns = User.__table__.columns.keys()
+        for key in kwargs.keys():
+            if key not in columns:
                 raise InvalidRequestError
-        user = self._session.query(User).filter(and_(*my_filters)).first()
+
+        user = self._session.query(User).filter_by(**kwargs).first()
+
         if user is None:
             raise NoResultFound
+
         return user
