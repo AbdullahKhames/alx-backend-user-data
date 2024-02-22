@@ -2,7 +2,7 @@
 """
 Main file
 """
-from requests import post, put
+from requests import post, put, get, Session
 
 BASE_URL = 'http://localhost:5000'
 SESSION_PATH = 'sessions'
@@ -30,17 +30,26 @@ def log_in_wrong_password(email: str, password: str) -> None:
 
 def log_in(email: str, password: str) -> str:
     """function to test with requests module the server"""
-    pass
+    resp = post(BASE_URL + SEP + SESSION_PATH, data={'email': email,
+                                                     'password': password})
+    assert resp.status_code == 200
+    assert resp.json() == {"email": email,
+                           "message": "logged in"}
 
 
 def profile_unlogged() -> None:
     """function to test with requests module the server"""
-    pass
+    resp = get(BASE_URL + SEP + PROFILE_PATH)
+    assert resp.status_code == 403
 
 
 def profile_logged(session_id: str) -> None:
     """function to test with requests module the server"""
-    pass
+    with Session() as session:
+        resp = session.get(BASE_URL + SEP + PROFILE_PATH,
+                           cookies={'session_id': session_id})
+        assert resp.status_code == 200
+        assert resp.json() == {"email": EMAIL}
 
 
 def log_out(session_id: str) -> None:
