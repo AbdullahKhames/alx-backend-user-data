@@ -78,8 +78,8 @@ def update_password() -> tuple:
         abort(403)
 
 
-@app.route('/reset_password', methods=['PUT'], strict_slashes=False)
-def change_password():
+@app.route('/reset_password', methods=['POST'], strict_slashes=False)
+def reset_password():
     """resets password"""
     email = request.form.get('email')
     if not email:
