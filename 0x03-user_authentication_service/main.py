@@ -14,16 +14,14 @@ SEP = '/'
 
 def register_user(email: str, password: str) -> None:
     """function to test with requests module the server"""
-    resp = post(BASE_URL + SEP + USERS_PATH, data={'email': email,
-                                                   'password': password})
-    print(resp.json())
+    post(BASE_URL + SEP + USERS_PATH, data={'email': email,
+                                            'password': password})
 
 
 def log_in_wrong_password(email: str, password: str) -> None:
     """function to test with requests module the server"""
-    resp = post(BASE_URL + SEP + SESSION_PATH, data={'email': email,
-                                                     'password': password})
-    print(resp.content)
+    post(BASE_URL + SEP + SESSION_PATH, data={'email': email,
+                                              'password': password})
 
 
 def log_in(email: str, password: str) -> str:
